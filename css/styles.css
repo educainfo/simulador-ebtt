@@ -1,0 +1,307 @@
+/* Simulador Professor EBTT */
+
+:root {
+  --ebtt-primary:   #0d4f8c;
+  --ebtt-secondary: #1a7abf;
+  --ebtt-accent:    #f5a623;
+  --ebtt-bg:        #f4f7fb;
+  --card-radius:    0.75rem;
+}
+
+body {
+  background-color: var(--ebtt-bg);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────────── */
+
+.site-header {
+  background: linear-gradient(135deg, var(--ebtt-primary), var(--ebtt-secondary));
+  color: #fff;
+  padding: 1rem 0;
+}
+
+.site-header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.site-header p {
+  font-size: 0.82rem;
+  opacity: 0.85;
+}
+
+/* ── Reajuste box ────────────────────────────────────────────────────────────── */
+
+.reajuste-box {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  color: #fff;
+}
+
+.reajuste-box .form-control {
+  background: rgba(255,255,255,0.9);
+  border: none;
+}
+
+/* ── Abas ────────────────────────────────────────────────────────────────────── */
+
+.nav-tabs .nav-link {
+  color: var(--ebtt-primary);
+  font-weight: 500;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--ebtt-primary);
+  font-weight: 700;
+  border-bottom-color: #fff;
+}
+
+/* ── Sim Card ────────────────────────────────────────────────────────────────── */
+
+.sim-card {
+  border-radius: var(--card-radius);
+  border: 1px solid #dce5f0;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(13,79,140,0.07);
+  overflow: hidden;
+}
+
+.sim-card .card-header {
+  background: var(--ebtt-primary);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sim-card-2 .card-header {
+  background: var(--ebtt-secondary);
+}
+
+.sim-card .card-body {
+  padding: 1rem;
+}
+
+/* ── Badge espelho ───────────────────────────────────────────────────────────── */
+
+.badge-espelho {
+  font-size: 0.72rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 1rem;
+  font-weight: 600;
+}
+
+.badge-espelho.sincronizado {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.badge-espelho.editado {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* ── Form labels ─────────────────────────────────────────────────────────────── */
+
+.form-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.2rem;
+}
+
+.form-select,
+.form-control {
+  font-size: 0.84rem;
+}
+
+/* ── Chips ───────────────────────────────────────────────────────────────────── */
+
+.chips-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 2rem;
+  border: 1.5px solid #c5d4e8;
+  background: #f0f4fa;
+  color: #3a5a7a;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.chip-btn:hover {
+  border-color: var(--ebtt-secondary);
+  background: #e3eff9;
+}
+
+.chip-btn.ativo {
+  background: var(--ebtt-primary);
+  border-color: var(--ebtt-primary);
+  color: #fff;
+}
+
+.chip-btn.ativo:hover {
+  background: #0b4278;
+}
+
+.chip-btn .chip-x {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-left: 0.1rem;
+  line-height: 1;
+}
+
+.chips-descontos .chip-btn {
+  border-color: #e0c8b0;
+  background: #fdf5ec;
+  color: #7a4a1a;
+}
+
+.chips-descontos .chip-btn:hover {
+  border-color: var(--ebtt-accent);
+  background: #fdebd0;
+}
+
+.chips-descontos .chip-btn.ativo {
+  background: #c0622a;
+  border-color: #c0622a;
+  color: #fff;
+}
+
+.chip-area {
+  background: #f8fafd;
+  border: 1px solid #dce5f0;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* ── Resultado ───────────────────────────────────────────────────────────────── */
+
+.resultado-tabela td {
+  padding: 0.28rem 0.5rem;
+  border: none;
+  vertical-align: middle;
+}
+
+.resultado-tabela .label-col {
+  color: #555;
+  width: 55%;
+  font-size: 0.83rem;
+}
+
+.resultado-tabela .valor-col {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+  font-size: 0.86rem;
+}
+
+.resultado-tabela .separador td {
+  border-top: 2px solid #dce5f0;
+  padding-top: 0.45rem;
+}
+
+.linha-bruto td {
+  font-weight: 700;
+  font-size: 0.93rem;
+  background: #f0f7ff;
+}
+
+.linha-liquido td {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ebtt-primary);
+  background: #e8f4fd;
+  border-top: 2px solid var(--ebtt-primary) !important;
+}
+
+.linha-desconto .valor-col { color: #c0392b; }
+.linha-auxilio  .valor-col { color: #27ae60; }
+
+/* ── Comparação ──────────────────────────────────────────────────────────────── */
+
+.comp-box {
+  background: #fff;
+  border-radius: var(--card-radius);
+  border: 1px solid #dce5f0;
+  box-shadow: 0 2px 8px rgba(13,79,140,0.07);
+  padding: 0.85rem 1.25rem;
+  text-align: center;
+}
+
+.comp-box .comp-label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Tabelas ─────────────────────────────────────────────────────────────────── */
+
+.table-prog th,
+.table-sal  th {
+  background: var(--ebtt-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.table-prog td,
+.table-sal  td {
+  font-size: 0.83rem;
+  vertical-align: middle;
+}
+
+/* ── Misc ────────────────────────────────────────────────────────────────────── */
+
+.aviso-dados {
+  font-size: 0.74rem;
+  color: #999;
+  border-left: 3px solid #ccc;
+  padding-left: 0.6rem;
+}
+
+.badge-periodo {
+  font-size: 0.7rem;
+  background: #e8f4fd;
+  color: var(--ebtt-primary);
+  border-radius: 0.3rem;
+  padding: 0.12rem 0.4rem;
+  font-weight: 600;
+}
+
+.secao-titulo {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #888;
+  margin-bottom: 0.4rem;
+}
+
+/* ── Responsivo ──────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .site-header h1  { font-size: 1.15rem; }
+  .sim-card        { margin-bottom: 1rem; }
+  .reajuste-box    { width: 100%; justify-content: center; }
+}
