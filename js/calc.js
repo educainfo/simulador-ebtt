@@ -186,6 +186,7 @@ function calcContracheque(p) {
     ? Math.max(deducaoDep, IRRF_DESCONTO_SIMPLIFICADO)
     : deducaoDep;
   const baseIrrf        = Math.max(0, totalTributavel - totalPrevidencia - deducaoUsada);
+  const baseCalcIR      = Math.max(0, totalTributavel - totalPrevidencia);
   const irrf            = calcIRRF(baseIrrf);
 
   // Auxílios
@@ -213,7 +214,7 @@ function calcContracheque(p) {
     vb, rt, anuenio, gae, funcao, risco, noturno, abonoPerm, valorDecisao,
     baseCPSS, bruto,
     rppsDesc, funprespDesc, totalPrevidencia,
-    baseIrrf, irrf, deducaoUsada,
+    baseIrrf, baseCalcIR, irrf, deducaoUsada,
     sindicatoDesc, outrosDescontos: outrosDesc, totalOutrosDesc,
     totalDescontos,
     alimValor, saudeValor, transpValor, preEscValor, totalAuxilios,

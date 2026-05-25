@@ -404,7 +404,7 @@ function htmlResultado(id) {
           <td class="valor-col" id="res-liquido-${id}"></td>
         </tr>
         <tr class="separador">
-          <td class="label-col text-muted small">Base IRRF</td>
+          <td class="label-col text-muted small">Base cálculo IR</td>
           <td class="valor-col text-muted small" id="res-base-irrf-${id}"></td>
         </tr>
         <tr>
@@ -777,7 +777,7 @@ function renderizarResultado(id, r, p) {
   showRow(`res-preesc-row-${id}`, r.preEscValor > 0);
 
   setTxt(`res-liquido-${id}`,   formatBRL(r.liquido));
-  setTxt(`res-base-irrf-${id}`, formatBRL(r.baseIrrf));
+  setTxt(`res-base-irrf-${id}`, formatBRL(r.baseCalcIR));
   setTxt(`res-deducao-${id}`,   formatBRL(r.deducaoUsada));
 }
 
