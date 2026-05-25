@@ -188,11 +188,33 @@ body {
 }
 
 .chip-area {
+  position: relative;
   background: #f8fafd;
   border: 1px solid #dce5f0;
   border-radius: 0.5rem;
   padding: 0.75rem;
+  padding-right: 2rem;
   margin-top: 0.5rem;
+}
+
+.chip-area-close {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.45rem;
+  background: none;
+  border: none;
+  color: #99aabb;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  border-radius: 0.25rem;
+  transition: color 0.1s, background 0.1s;
+}
+
+.chip-area-close:hover {
+  color: #c0392b;
+  background: #fdecea;
 }
 
 /* ── Resultado ───────────────────────────────────────────────────────────────── */

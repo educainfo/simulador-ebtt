@@ -237,7 +237,7 @@ function htmlOpcoesPeriodo() {
 
 function htmlOpcoesRegime() {
   return `
-    <option value="DE">Dedicação Exclusiva</option>
+    <option value="DE">DE</option>
     <option value="40h">40h</option>
     <option value="20h">20h</option>`;
 }
@@ -343,6 +343,7 @@ function htmlChipsGrupo(id, chips, extraClass) {
 
   const areas = chips.map(c => `
     <div id="chip-area-${c.id}-${id}" class="chip-area" style="display:none">
+      <button type="button" class="chip-area-close" onclick="fecharChipArea(${id}, '${c.id}')" title="Fechar">×</button>
       ${c.htmlCampo(id)}
     </div>`).join('');
 
@@ -456,10 +457,22 @@ function criarSimCard(id) {
 
 function toggleChip(simId, chipId) {
   const ativo = chipsAtivos[simId].has(chipId);
+  if (ativo) {
+    const area = document.getElementById(`chip-area-${chipId}-${simId}`);
+    if (area && area.style.display === 'none') {
+      area.style.display = '';
+      return;
+    }
+  }
   setChipAtivo(simId, chipId, !ativo);
   if (simId === 2) sim2Editados.add(`chip_${chipId}`);
   atualizarBadgeEspelho();
   calcularTudo();
+}
+
+function fecharChipArea(simId, chipId) {
+  const area = document.getElementById(`chip-area-${chipId}-${simId}`);
+  if (area) area.style.display = 'none';
 }
 
 function setChipAtivo(simId, chipId, ativo) {
