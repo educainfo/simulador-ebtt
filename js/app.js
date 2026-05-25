@@ -3,7 +3,6 @@
 // ─── Constantes de UI ────────────────────────────────────────────────────────
 
 const PERIODOS_LABEL = {
-  jan2025:  'Jan/2025',
   abr2026:  'Abr/2026',
   proj2027: '2027 (proj.)',
 };
@@ -230,7 +229,6 @@ const CHIPS_DESCONTOS = [
 
 function htmlOpcoesPeriodo() {
   return `
-    <option value="jan2025">Jan/2025</option>
     <option value="abr2026" selected>Abr/2026</option>
     <option value="proj2027">2027 (projetado)</option>`;
 }
@@ -507,7 +505,7 @@ function lerCoreCampo(campo, id) {
 function lerParamsBrutos(id) {
   const p = {};
   CAMPOS_CORE.forEach(c => { p[c] = lerCoreCampo(c, id); });
-  p.reajuste2027         = parseFloat(document.getElementById('reajuste-2027')?.value) || 5;
+  p.reajuste2027         = parseFloat(document.getElementById('reajuste-2027')?.value) || 0;
   p.funprespAliquota     = (parseFloat(document.getElementById(`funpresp-aliq-${id}`)?.value) || 8.5) / 100;
   p.funprespPlano        = document.querySelector(`input[name="fp-plano-${id}"]:checked`)?.value ?? 'normal';
   p.funprespParticipacao = parseFloat(document.getElementById(`funpresp-part-${id}`)?.value) || 0;
@@ -824,7 +822,7 @@ function renderizarProgressao() {
   const regime    = document.getElementById('prog-regime')?.value ?? 'DE';
   const titulacao = document.getElementById('prog-titulacao')?.value ?? 'dout';
   const meses     = parseInt(document.getElementById('prog-meses')?.value ?? '25', 10);
-  const reajuste  = parseFloat(document.getElementById('reajuste-2027')?.value) || 5;
+  const reajuste  = parseFloat(document.getElementById('reajuste-2027')?.value) || 0;
 
   const posicao  = getVbKey(classe, nivel);
   const dataAtual = dataStr ? new Date(dataStr + 'T00:00:00') : new Date();
@@ -895,7 +893,7 @@ function popularNiveisProgressao() {
 function renderizarTabelas() {
   const periodo  = document.getElementById('tabelas-periodo')?.value ?? 'abr2026';
   const regime   = document.getElementById('tabelas-regime')?.value ?? 'de';
-  const reajuste = (parseFloat(document.getElementById('reajuste-2027')?.value) || 5) / 100;
+  const reajuste = (parseFloat(document.getElementById('reajuste-2027')?.value) || 0) / 100;
   const tbody    = document.getElementById('tabelas-tbody');
   if (!tbody) return;
   tbody.innerHTML = '';

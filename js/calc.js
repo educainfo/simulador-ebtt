@@ -237,7 +237,7 @@ function calcProgressao({ posicaoAtual, dataAtual, regime, titulacao,
     const pos    = PROGRESSAO_SEQUENCIA[i];
     const classe = pos.charAt(0);
     const nivel  = parseInt(pos.charAt(1), 10);
-    const periodo = data >= d27 ? 'proj2027' : data >= d26 ? 'abr2026' : 'jan2025';
+    const periodo = data >= d27 ? 'proj2027' : 'abr2026';
     const vb     = getVB(periodo, regime, classe, nivel, reajuste2027 / 100);
     const rt     = getRT(vb, regime, titulacao, periodo, pos, reajuste2027 / 100);
 

@@ -26,14 +26,6 @@ const PROGRESSAO_SEQUENCIA = ['A1','B1','B2','B3','B4','C1','C2','C3','C4','T1']
 // Por período → regime (h20/h40/de) → classe+nível
 
 const VB = {
-  jan2025: {
-    h20: { A1:3090.43, B1:3260.40, B2:3407.12, B3:3560.44, B4:3720.66,
-            C1:4595.02, C2:4801.79, C3:5017.87, C4:5243.68, T1:5768.05 },
-    h40: { A1:4326.60, B1:4564.56, B2:4769.97, B3:4984.62, B4:5208.93,
-            C1:6433.02, C2:6722.51, C3:7025.02, C4:7341.15, T1:8075.27 },
-    de:  { A1:6180.86, B1:6520.81, B2:6814.24, B3:7120.88, B4:7441.32,
-            C1:9190.03, C2:9603.58, C3:10035.75, C4:10487.35, T1:11536.10 },
-  },
   abr2026: {
     h20: { A1:3198.59, B1:3390.51, B2:3560.03, B3:3738.04, B4:3924.94,
             C1:4808.05, C2:5048.45, C3:5300.87, C4:5565.92, T1:6122.51 },
@@ -46,7 +38,7 @@ const VB = {
 
 // ── Retribuição por Titulação — percentuais fixos sobre o VB ─────────────────
 // RSC equivalências: RSC-I = espec, RSC-II = mestrado, RSC-III = dout
-// Usados como fallback para jan/2025 e proj/2027 (sem tabela fixa)
+// Usados como fallback para proj/2027 (sem tabela fixa)
 
 const RT_PERCENT = {
   h20: { aperf:0.050, espec:0.100, mestrado:0.250, dout:0.575  },
@@ -111,7 +103,6 @@ const GAE_PERCENTUAL = 1.60; // 160% do VB
 
 // ── Auxílio Alimentação por período ──────────────────────────────────────────
 const AUXILIOS_ALIMENTACAO = {
-  jan2025:  1175.00,
   abr2026:  1192.00,
   proj2027: 1192.00,
 };
@@ -136,19 +127,8 @@ function calcReducaoIRRF2026(base) {
 }
 
 // ── RPPS — alíquotas progressivas por vigência ───────────────────────────────
-// jan2025: Portaria Interministerial MPS/MF 1/2025 (SM = R$ 1.518)
 // abr2026: Portaria Interministerial MPS/MF 1/2026 (SM = R$ 1.622, reajuste INPC/INSS = 3,9%)
 const RPPS_TABLES = {
-  jan2025: [
-    { limite:1518.00,  aliquota:0.075 },
-    { limite:2793.87,  aliquota:0.090 },
-    { limite:4190.81,  aliquota:0.120 },
-    { limite:8157.41,  aliquota:0.140 },
-    { limite:14082.16, aliquota:0.145 },
-    { limite:27193.01, aliquota:0.165 },
-    { limite:52981.47, aliquota:0.190 },
-    { limite:Infinity, aliquota:0.220 },
-  ],
   abr2026: [
     { limite:1622.00,  aliquota:0.075 },
     { limite:2902.83,  aliquota:0.090 },
@@ -163,7 +143,7 @@ const RPPS_TABLES = {
 RPPS_TABLES.proj2027 = RPPS_TABLES.abr2026; // reajuste 2027 não definido — usa base 2026
 
 // Teto RGPS por período (= limite máximo do benefício do RGPS)
-const TETO_RGPS = { jan2025: 8157.41, abr2026: 8475.55, proj2027: 8475.55 };
+const TETO_RGPS = { abr2026: 8475.55, proj2027: 8475.55 };
 const TETO_RGPS_2026 = 8475.55; // mantido para referência na UI
 
 // ── Saúde Suplementar — subsídio per capita (Portaria MGI 2.778/2026) ────────
@@ -202,7 +182,7 @@ const SAUDE_SUBSIDIO_MATRIX = [
 ];
 
 // ── Adicional de Risco / Insalubridade ───────────────────────────────────────
-const SALARIO_MINIMO_TABLE = { jan2025: 1518.00, abr2026: 1622.00, proj2027: 1622.00 };
+const SALARIO_MINIMO_TABLE = { abr2026: 1622.00, proj2027: 1622.00 };
 const SALARIO_MINIMO = 1622.00; // 2026 — valor base para cálculos de insalubridade
 
 const ADICIONAL_RISCO = [
