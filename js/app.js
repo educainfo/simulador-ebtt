@@ -603,7 +603,7 @@ function popularClassesSim(id) {
     opt.textContent = c.label;
     sel.appendChild(opt);
   });
-  sel.value = 'C';
+  sel.value = 'A';
   popularNiveisSim(id, false);
 }
 

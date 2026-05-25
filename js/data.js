@@ -1,5 +1,5 @@
 // ─── Tabelas salariais — Simulador Professor EBTT ────────────────────────────
-// Fontes: UFC (progep.ufc.br), IFPR, MP 1.286/2024, Lei 15.191/2025
+// Fontes: Lei 12.772/2012, MP 1.286/2024, Lei 15.191/2025
 // Vigências: jan/2025 e abr/2026
 
 // ── Estrutura da carreira (MP 1.286/2024) ────────────────────────────────────
