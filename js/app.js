@@ -66,14 +66,15 @@ const CHIPS_BENEFICIOS = [
         <div class="col-6">
           <label class="form-label">Gasto diário (R$)</label>
           <input type="number" id="transporte-gasto-${id}" class="form-control form-control-sm"
-                 value="10" min="0" step="0.50">
+                 value="10" min="0" step="0.01">
         </div>
         <div class="col-6">
           <label class="form-label">Dias úteis/mês</label>
           <input type="number" id="transporte-dias-${id}" class="form-control form-control-sm"
                  value="22" min="0" max="31">
         </div>
-      </div>`,
+      </div>
+      <small class="text-muted">Desconto de 6% do VB aplicado. Benefício = max(0, total − 6%×VB).</small>`,
     lerValores: (id) => ({
       auxTransporte: true,
       transpGastoDiario: parseFloat(document.getElementById(`transporte-gasto-${id}`)?.value) || 0,
@@ -771,7 +772,7 @@ function renderizarResultado(id, r, p) {
   showRow(`res-saude-row-${id}`, r.saudeValor > 0);
 
   setTxt(`res-transp-${id}`, formatBRL(r.transpValor));
-  showRow(`res-transp-row-${id}`, r.transpValor > 0);
+  showRow(`res-transp-row-${id}`, chipsAtivos[id].has('transporte'));
 
   setTxt(`res-preesc-${id}`, formatBRL(r.preEscValor));
   showRow(`res-preesc-row-${id}`, r.preEscValor > 0);
