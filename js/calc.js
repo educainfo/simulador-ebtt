@@ -206,9 +206,9 @@ function calcContracheque(p) {
   const totalOutrosDesc = sindicatoDesc + outrosDesc;
 
   // Totais
-  const bruto          = baseCPSS + abonoPerm + valorDecisao;
+  const bruto          = baseCPSS + abonoPerm + valorDecisao + totalAuxilios;
   const totalDescontos = totalPrevidencia + irrf + totalOutrosDesc;
-  const liquido        = bruto - totalDescontos + totalAuxilios;
+  const liquido        = bruto - totalDescontos;
 
   return {
     vb, rt, anuenio, gae, funcao, risco, noturno, abonoPerm, valorDecisao,

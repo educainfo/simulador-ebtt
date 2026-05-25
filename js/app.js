@@ -376,14 +376,14 @@ function htmlResultado(id) {
         ${rowT('noturno', 'Adicional noturno')}
         ${rowT('abono',   'Abono permanência (RPPS)')}
         ${rowT('decisao', 'Decisão judicial')}
-        <tr class="separador linha-bruto">
-          <td class="label-col fw-bold">Rendimento Bruto</td>
-          <td class="valor-col fw-bold" id="res-bruto-${id}"></td>
-        </tr>
         ${rowT('alim',   '(+) Aux. Alimentação',  'linha-auxilio')}
         ${rowT('saude',  '(+) Saúde Suplementar', 'linha-auxilio')}
         ${rowT('transp', '(+) Transporte',         'linha-auxilio')}
         ${rowT('preesc', '(+) Pré-escolar',        'linha-auxilio')}
+        <tr class="separador linha-bruto">
+          <td class="label-col fw-bold">Rendimento Bruto</td>
+          <td class="valor-col fw-bold" id="res-bruto-${id}"></td>
+        </tr>
         <tr class="separador linha-desconto">
           <td class="label-col">(-) Previdência RPPS</td>
           <td class="valor-col" id="res-rpps-${id}"></td>
