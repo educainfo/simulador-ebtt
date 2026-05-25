@@ -5,18 +5,18 @@
 // ── Estrutura da carreira (MP 1.286/2024) ────────────────────────────────────
 
 const ESTRUTURA_CARREIRA = [
-  { classe: 'A', label: 'Classe A — Auxiliar',   niveis: [1] },
-  { classe: 'B', label: 'Classe B — Assistente', niveis: [1, 2, 3, 4] },
-  { classe: 'C', label: 'Classe C — Adjunto',    niveis: [1, 2, 3, 4] },
-  { classe: 'T', label: 'Titular',               niveis: [1] },
+  { classe: 'A', label: 'Classe A', niveis: [1] },
+  { classe: 'B', label: 'Classe B', niveis: [1, 2, 3, 4] },
+  { classe: 'C', label: 'Classe C', niveis: [1, 2, 3, 4] },
+  { classe: 'T', label: 'Titular',  niveis: [1] },
 ];
 
 const POSICAO_LABEL = {
-  A1: 'Classe A — Nível 1 (Auxiliar)',
-  B1: 'Classe B — Nível 1 (Assistente)', B2: 'Classe B — Nível 2',
-  B3: 'Classe B — Nível 3',             B4: 'Classe B — Nível 4',
-  C1: 'Classe C — Nível 1 (Adjunto)',    C2: 'Classe C — Nível 2',
-  C3: 'Classe C — Nível 3',             C4: 'Classe C — Nível 4',
+  A1: 'Classe A — Nível 1',
+  B1: 'Classe B — Nível 1', B2: 'Classe B — Nível 2',
+  B3: 'Classe B — Nível 3', B4: 'Classe B — Nível 4',
+  C1: 'Classe C — Nível 1', C2: 'Classe C — Nível 2',
+  C3: 'Classe C — Nível 3', C4: 'Classe C — Nível 4',
   T1: 'Titular',
 };
 

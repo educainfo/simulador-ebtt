@@ -249,7 +249,7 @@ function htmlOpcoesTitulacao() {
 function htmlCamposObrigatorios(id) {
   return `
     <div class="row g-2 mb-3">
-      <div class="col-6 col-md-3">
+      <div class="col-6 col-md-2">
         <label class="form-label" for="periodo-${id}">Vigência</label>
         <select id="periodo-${id}" class="form-select">${htmlOpcoesPeriodo()}</select>
       </div>
@@ -261,7 +261,7 @@ function htmlCamposObrigatorios(id) {
         <label class="form-label" for="classe-${id}">Classe</label>
         <select id="classe-${id}" class="form-select"></select>
       </div>
-      <div class="col-6 col-md-1">
+      <div class="col-6 col-md-2">
         <label class="form-label" for="nivel-${id}">Nível</label>
         <select id="nivel-${id}" class="form-select"></select>
       </div>
