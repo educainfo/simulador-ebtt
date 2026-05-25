@@ -1,0 +1,11 @@
+{
+  "name": "simulador-ebtt",
+  "version": "1.0.0",
+  "description": "Simulador de contracheque para professores EBTT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}
