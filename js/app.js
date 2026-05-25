@@ -968,8 +968,8 @@ document.addEventListener('DOMContentLoaded', () => {
     popularTitulacoesSim(id);
   });
 
-  // Valores padrão: Sim 1 Adjunto C1 DE Doutorado
-  const defaults1 = { periodo:'abr2026', regime:'DE', classe:'C', nivel:1,
+  // Valores padrão: Sim 1 Adjunto A1 DE Doutorado
+  const defaults1 = { periodo:'abr2026', regime:'DE', classe:'A', nivel:1,
                        titulacao:'dout', previdencia:'rpps', dependentes:0 };
   CAMPOS_CORE.forEach(campo => {
     const el = document.getElementById(`${campo}-1`);
