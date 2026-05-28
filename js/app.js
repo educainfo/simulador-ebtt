@@ -156,16 +156,48 @@ const CHIPS_BENEFICIOS = [
     lerValores: (_id) => ({ gaeAtivo: true }),
   },
   {
-    id: 'funcao', label: 'Função CD/FG', icon: '💼',
+    id: 'funcao', label: 'Função CD/FG/FCC', icon: '💼',
     htmlCampo: (id) => `
-      <div class="col-6">
-        <label class="form-label">Valor da função (R$)</label>
-        <input type="number" id="funcao-val-${id}" class="form-control form-control-sm"
-               value="0" min="0" step="100">
+      <div class="row g-2">
+        <div class="col-12">
+          <label class="form-label">Tipo de função</label>
+          <select id="funcao-tipo-${id}" class="form-select form-select-sm"
+                  onchange="atualizarChipFuncao(${id})">
+            ${FUNCOES.map(f => `<option value="${f.value}">${f.label}</option>`).join('')}
+          </select>
+        </div>
+        <div id="funcao-cd-area-${id}" class="col-12" style="display:none">
+          <div class="form-check mb-1">
+            <input class="form-check-input" type="checkbox" id="funcao-opcao-${id}">
+            <label class="form-check-label small" for="funcao-opcao-${id}">
+              Com opção — CD substitui toda a remuneração
+            </label>
+          </div>
+          <small class="text-muted">Sem opção (padrão): salário normal + 60% do CD (Lei 9.030/1995, Art. 2º §2º).</small>
+        </div>
+        <div class="col-12">
+          <small class="text-muted">Valor fixo — incluído na base RPPS e IRRF.</small>
+        </div>
       </div>`,
-    lerValores: (id) => ({
-      funcaoValor: parseFloat(document.getElementById(`funcao-val-${id}`)?.value) || 0,
-    }),
+    lerValores: (id) => {
+      const tipo    = document.getElementById(`funcao-tipo-${id}`)?.value ?? 'nenhuma';
+      const periodo = document.getElementById(`periodo-${id}`)?.value ?? 'abr2026';
+      const reajuste = (parseFloat(document.getElementById('reajuste-2027')?.value) || 0) / 100;
+      const opcao   = document.getElementById(`funcao-opcao-${id}`)?.checked ?? false;
+      const f       = FUNCOES.find(x => x.value === tipo);
+      let valor = 0;
+      let subst = false;
+      if (f && f.tipo) {
+        const base = periodo === 'proj2027' ? f.abr2026 * (1 + reajuste) : f.abr2026;
+        if (f.tipo === 'cd') {
+          subst = opcao;
+          valor = opcao ? base : base * 0.6;
+        } else {
+          valor = base;
+        }
+      }
+      return { funcaoValor: valor, funcaoSubst: subst, funcaoTipo: tipo };
+    },
   },
   {
     id: 'abono', label: 'Abono Perm.', icon: '🏅',
@@ -372,7 +404,7 @@ function htmlResultado(id) {
         ${row('rt',  'RT/RSC')}
         ${rowT('anuenio', 'Anuênio')}
         ${rowT('gae',     'GAE (160% VB)')}
-        ${rowT('funcao',  'Função CD/FG')}
+        ${rowT('funcao',  'Função CD/FG/FCC')}
         ${rowT('risco',   'Adicional risco/insalubridade')}
         ${rowT('noturno', 'Adicional noturno')}
         ${rowT('abono',   'Abono permanência (RPPS)')}
@@ -450,6 +482,20 @@ function criarSimCard(id) {
         </div>
       </div>
     </div>`;
+}
+
+// ─── Helper: chip Função ──────────────────────────────────────────────────────
+
+function atualizarChipFuncao(id) {
+  const tipo    = document.getElementById(`funcao-tipo-${id}`)?.value ?? 'nenhuma';
+  const cdArea  = document.getElementById(`funcao-cd-area-${id}`);
+  const isCD    = FUNCOES.find(f => f.value === tipo)?.tipo === 'cd';
+  if (cdArea) cdArea.style.display = isCD ? '' : 'none';
+  if (!isCD) {
+    const check = document.getElementById(`funcao-opcao-${id}`);
+    if (check) check.checked = false;
+  }
+  calcularTudo();
 }
 
 // ─── Sistema de chips ─────────────────────────────────────────────────────────
@@ -733,8 +779,19 @@ function renderizarResultado(id, r, p) {
   setTxt(`res-gae-${id}`, formatBRL(r.gae));
   showRow(`res-gae-row-${id}`, r.gae > 0);
 
+  const funcaoObj   = FUNCOES.find(f => f.value === (p.funcaoTipo ?? 'nenhuma'));
+  const funcaoLabel = funcaoObj && funcaoObj.tipo
+    ? `Função ${funcaoObj.label}${r.funcaoSubst ? ' (com opção)' : funcaoObj.tipo === 'cd' ? ' (sem opção, 60%)' : ''}`
+    : 'Função CD/FG/FCC';
+  setTxt(`res-funcao-label-${id}`, funcaoLabel);
   setTxt(`res-funcao-${id}`, formatBRL(r.funcao));
   showRow(`res-funcao-row-${id}`, r.funcao > 0);
+
+  // CD com opção: VB e outros componentes zerados — adiciona nota visual
+  const vbEl = document.getElementById(`res-vb-${id}`);
+  if (vbEl) vbEl.closest('tr')?.classList?.toggle('text-muted', !!r.funcaoSubst);
+  const rtEl = document.getElementById(`res-rt-${id}`);
+  if (rtEl) rtEl.closest('tr')?.classList?.toggle('text-muted', !!r.funcaoSubst);
 
   setTxt(`res-risco-${id}`, formatBRL(r.risco));
   showRow(`res-risco-row-${id}`, r.risco > 0);

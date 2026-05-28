@@ -130,7 +130,8 @@ function calcContracheque(p) {
     periodo = 'abr2026', regime = 'DE', classe = 'C', nivel = 1,
     titulacao = 'none',  reajuste2027 = 5,
     anuenioPct = 0,      gaeAtivo = false,
-    funcaoValor = 0,     riscoTipo = 'nenhum', noturnoHoras = 0,
+    funcaoValor = 0,     funcaoSubst = false,
+    riscoTipo = 'nenhum', noturnoHoras = 0,
     previdencia = 'rpps', funprespAliquota = 0.085, funprespFacultativa = 0,
     abonoPermanencia = false, dependentes = 0, descsimpl: descontoSimplificado = true,
     auxAlimentacao = false,
@@ -149,15 +150,20 @@ function calcContracheque(p) {
   // Rendimentos
   const vb      = getVB(periodo, regime, classe, nivel, reajuste2027 / 100);
   const posKey  = getVbKey(classe, nivel);
-  const rt      = getRT(vb, regime, titulacao, periodo, posKey, reajuste2027 / 100);
-  const anuenio = vb * ((+anuenioPct || 0) / 100);
-  const gae     = gaeAtivo ? vb * GAE_PERCENTUAL : 0;
   const funcao  = +funcaoValor || 0;
-  const risco   = calcAdicionalRisco(riscoTipo, vb, smValor);
-  const noturno = calcAdicionalNoturno(+noturnoHoras || 0, vb, regime);
+
+  // funcaoSubst: CD com opção — substitui toda a remuneração pelo valor da função
+  const rt      = funcaoSubst ? 0 : getRT(vb, regime, titulacao, periodo, posKey, reajuste2027 / 100);
+  const anuenio = funcaoSubst ? 0 : vb * ((+anuenioPct || 0) / 100);
+  const gae     = funcaoSubst ? 0 : (gaeAtivo ? vb * GAE_PERCENTUAL : 0);
+  const risco   = funcaoSubst ? 0 : calcAdicionalRisco(riscoTipo, vb, smValor);
+  const noturno = funcaoSubst ? 0 : calcAdicionalNoturno(+noturnoHoras || 0, vb, regime);
 
   // Base previdenciária (CPSS)
-  const baseCPSS = vb + rt + anuenio + gae + funcao + risco + noturno;
+  // CD com opção: apenas o valor da função compõe a base; demais componentes zeramos
+  const baseCPSS = funcaoSubst
+    ? funcao
+    : vb + rt + anuenio + gae + funcao + risco + noturno;
 
   // Previdência
   let rppsDesc = 0, funprespDesc = 0;
@@ -212,7 +218,7 @@ function calcContracheque(p) {
 
   return {
     vb, rt, anuenio, gae, funcao, risco, noturno, abonoPerm, valorDecisao,
-    baseCPSS, bruto,
+    baseCPSS, bruto, funcaoSubst,
     rppsDesc, funprespDesc, totalPrevidencia,
     baseIrrf, baseCalcIR, irrf, deducaoUsada,
     sindicatoDesc, outrosDescontos: outrosDesc, totalOutrosDesc,

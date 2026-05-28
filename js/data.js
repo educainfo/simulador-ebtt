@@ -208,6 +208,32 @@ const AUX_PRE_ESCOLAR_FILHO = 526.64; // por filho/mês — Portaria MGI 2.785/2
 // O auxílio nunca é negativo — se gasto < 6% VB, não recebe nada
 const TRANSP_PCT_DESCONTO = 0.06;
 
+// ── Funções (CD, FG, FCC) ────────────────────────────────────────────────────
+// Fonte: taes.com.br/carreiras.json (referência Jan/2026)
+// Para proj/2027 os valores são escalados pelo reajuste2027 informado pelo usuário
+// CD sem opção: servidor recebe salário normal + 60% do CD (Lei 9.030/1995, Art. 2º §2º)
+// CD com opção: CD substitui integralmente toda a remuneração do cargo efetivo
+const FUNCOES = [
+  { value: 'nenhuma', label: 'Nenhuma',  tipo: null,  abr2026:     0       },
+  // Cargo de Direção (CD)
+  { value: 'cd1',     label: 'CD-1',     tipo: 'cd',  abr2026: 22219.64    },
+  { value: 'cd2',     label: 'CD-2',     tipo: 'cd',  abr2026: 16806.33    },
+  { value: 'cd3',     label: 'CD-3',     tipo: 'cd',  abr2026: 12291.61    },
+  { value: 'cd4',     label: 'CD-4',     tipo: 'cd',  abr2026:  8315.71    },
+  // Função Gratificada (FG)
+  { value: 'fg1',     label: 'FG-1',     tipo: 'fg',  abr2026:  1263.32    },
+  { value: 'fg2',     label: 'FG-2',     tipo: 'fg',  abr2026:   849.91    },
+  { value: 'fg3',     label: 'FG-3',     tipo: 'fg',  abr2026:   689.05    },
+  { value: 'fg4',     label: 'FG-4',     tipo: 'fg',  abr2026:   321.77    },
+  { value: 'fg5',     label: 'FG-5',     tipo: 'fg',  abr2026:   261.10    },
+  { value: 'fg6',     label: 'FG-6',     tipo: 'fg',  abr2026:   191.45    },
+  { value: 'fg7',     label: 'FG-7',     tipo: 'fg',  abr2026:   122.10    },
+  { value: 'fg8',     label: 'FG-8',     tipo: 'fg',  abr2026:    90.32    },
+  { value: 'fg9',     label: 'FG-9',     tipo: 'fg',  abr2026:    73.27    },
+  // Função Comissionada de Coordenação de Curso (FCC) — Lei 12.772/2012, Art. 38
+  { value: 'fcc',     label: 'FCC',      tipo: 'fcc', abr2026:  1273.25    },
+];
+
 // ── Decisão Judicial ──────────────────────────────────────────────────────────
 const DECISAO_TIPOS = [
   { value:'nao',   label:'Não'                         },
